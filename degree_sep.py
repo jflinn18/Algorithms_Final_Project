@@ -75,7 +75,8 @@ for row in range(len(preferences)): #row and column are indeces to parallel dist
 num_clusters = 5
 		
 #----------------KMeans Clustering Algoritm-----------------------
-kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(distances)
+#kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(distances)
+kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(preferences)
 kmeans_groups = kmeans.labels_ #This is a np.ndarray
 
 groups = {}
@@ -95,7 +96,8 @@ print("-------------------------------------------------\n\n\n")
 
 
 #--------------------Spectral Clustering-------------------------------
-spectral = SpectralClustering(n_clusters=num_clusters).fit(distances)
+#spectral = SpectralClustering(n_clusters=num_clusters).fit(distances)
+spectral = SpectralClustering(n_clusters=num_clusters).fit(preferences)
 spectral_groups = spectral.labels_
 
 groups = {}
