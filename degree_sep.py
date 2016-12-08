@@ -18,7 +18,10 @@ oneDegree = copy.deepcopy(original)
 for key, value in original.items():
 	for person in value[0]:
 		#Add a list in the big list of lists to be the list of people that are one degree away
-		oneDegree[key][1] = oneDegree[key][1] + original[int(person)][0]
+		try:
+			oneDegree[key][1] = oneDegree[key][1] + original[int(person)][0]
+		except:
+			pdb.set_trace()
 		#oneDegree[key] = [oneDegree[key][0], original[int(person)][0] + oneDegree[key][1], value[1]]
 		#print(oneDegree[key])
 	oneDegree[key][1] = list(set(oneDegree[key][1]))
@@ -27,22 +30,7 @@ for key, value in original.items():
 
 print(oneDegree)
 friendWeight = .75
-"""
-preferences = np.array([])
-distances = np.array([])
-for i in range(len(rd.students)):
-	temp = np.array([])
-	temp2 = np.array([])
-	for j in range(len(rd.students)):
-		np.append(temp, 0)
-		np.append(temp2, 2)
-		#temp.append(0)
-		#temp2.append(2)
-	#preferences.append(temp)
-	#distances.append(temp2)
-	np.append(preferences, temp)
-	np.append(distances, temp2)
-"""	
+
 #This works!!!
 preferences = np.identity(len(rd.students))
 distances = np.full((len(rd.students), len(rd.students)), 2)

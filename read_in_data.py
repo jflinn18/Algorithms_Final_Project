@@ -4,8 +4,8 @@ dataFile = open("student_requests.txt")
 
 students = []
 requests = {}
-good = 2
-bad = 1
+good = 3
+bad = 2
 
 temp = ""
 count = 1

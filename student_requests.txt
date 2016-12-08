@@ -1,24 +1,25 @@
-Craig Colegrove 2 3 5
-Joseph Flinn 1 5 6
-Michael Arnold 6 4 1 
-Christopher Pereyda 5 6 2
-Derek Hansen 3 2 4
-Kathleen Levi 4 1 2
-Craige Colegrove 2 3 5
-Josephe Flinn 1 5 6
-Michaele Arnold 6 4 1 
-Christophere Pereyda 5 6 2
-Dereke Hansen 3 2 4
-Kathleene Levi 4 11 2
-aCraig Colegrove 2 13 5
-aJoseph Flinn 1 5 16
-aMichael Arnold 6 4 11 
-aChristopher Pereyda 15 6 2
-aDerek Hansen 3 12 4
-aKathleen Levi 4 11 2
-aCraige Colegrove 12 3 5
-aJosephe Flinn 1 5 16
-aMichaele Arnold 6 14 1 
-aChristophere Pereyda 5 16 2
-aDereke Hansen 3 2 14
-aKathleene Levi 4 1 12
+Neely Gore 10 22 24 5 20
+Stu Brewster 21 18 24 19 11
+Neil Espenson 15 7 3 5 6
+Lee Meadows 16 22 14 7 2
+Sheridan Saylor 17 4 25 12 10
+Steph Dickson 9 24 17 21 13
+Taylor Draper 18 25 13 22 17
+Kerry Ryley 9 25 16 7 19
+Graham Lee 14 18 20 3 5
+Shaun Martell 14 8 4 7 23
+Haven Milburn 11 15 4 10 6
+Chandler Pickering 23 19 20 6 5
+George Kevins 16 22 2 24 17
+Mansel Gibbs 11 3 18 13 22
+Chet Andrewson 23 11 25 21 3
+Elizabeth Pelley 17 22 6 13 12
+Mandy Elwes 9 25 4 13 20
+Sydney Quickley 22 10 1 2 4
+Haze Shakesheave 8 22 10 9 3
+Jolene Atkins 6 7 1 15 23
+Tonya Wheelock 8 4 6 3 9
+Rebecca Haight 24 18 22 10 11
+Macey Parrish 24 21 11 8 6
+Aubree Queshire 14 6 10 18 15
+Trista Owston 19 13 16 10 22
