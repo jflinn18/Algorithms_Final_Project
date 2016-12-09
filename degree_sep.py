@@ -85,6 +85,38 @@ print("-------------------------------------------------\n\n\n")
 # For all of the people in the groups > 5, move the closest person to the "single point" into the smaller group
 # recalculate the average if the small group is still less than 5
 
+for key, group in groups.items():
+	if len(group) < 5:
+		avg = np.empty_like(preferences[0])
+		count = 0.0
+		for member in group:
+			idx = rd.students.index(member)
+			#pdb.set_trace()
+			avg += preferences[idx]
+			count += 1.0
+			print(preferences[idx-1])
+		avg = avg/count
+		print(avg) 
+
+"""[ 0.25      0.296875  0.        1.        0.        0.        0.        0.
+  0.        0.4375    0.        0.        0.        0.        0.       -0.25
+  0.        0.       -0.5       0.25      1.        0.        0.25      0.25
+  0.25    ]
+[ 0.        0.        0.25      0.       -0.5       0.        0.        0.25
+  0.        0.1875   -0.5       0.        0.25      0.046875  0.        1.
+  0.        0.        0.        0.25      0.25      0.75      0.25      0.
+  0.25    ]
+[ 0.        0.        0.        0.        0.046875  0.        0.        1.
+  0.        0.25      0.25      0.       -0.25      0.        0.        0.25
+  1.        0.25      0.        0.        0.25      0.1875    0.        0.
+ -0.5     ]
+[ 0.05395833 -0.02354167 -0.23416667  0.00645833  0.47916667  0.05583333
+  0.113125    0.73729167  0.01645833  0.23479167  0.275625   -0.01333333
+ -0.04270833  0.18020833  0.13458333  0.08833333  0.47208333  0.69791667
+  0.01666667  0.13895833  0.24291667  0.20083333  0.1525      0.11791667
+ -0.32604167]"""
+		
+
 
 """#--------------------Spectral Clustering-------------------------------
 #spectral = SpectralClustering(n_clusters=num_clusters).fit(distances)
