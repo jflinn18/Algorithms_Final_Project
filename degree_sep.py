@@ -28,7 +28,7 @@ for key, value in original.items():
 	if key in oneDegree[key][1]:
 		oneDegree[key][1].remove(key)
 
-print(oneDegree)
+#print(oneDegree)
 friendWeight = .75
 
 #This works!!!
@@ -49,7 +49,7 @@ for person, prefs in oneDegree.items():
 	friendWeight = .25
 	for secondaryFriend in prefs[1]:
 		preferences[person-1][secondaryFriend-1] += friendWeight
-	friendWeight = -.33
+	friendWeight = -.5
 	for enemy in prefs[2]:
 		preferences[person-1][enemy-1] += friendWeight
 
@@ -81,9 +81,12 @@ group_happiness = happiness.calculate_happiness(groups, distances, rd.students) 
 print("Total Happiness: " + str(sum(group_happiness)))
 print("-------------------------------------------------\n\n\n")
 
+#Average the groups < 5 into a single point. 
+# For all of the people in the groups > 5, move the closest person to the "single point" into the smaller group
+# recalculate the average if the small group is still less than 5
 
 
-#--------------------Spectral Clustering-------------------------------
+"""#--------------------Spectral Clustering-------------------------------
 #spectral = SpectralClustering(n_clusters=num_clusters).fit(distances)
 spectral = SpectralClustering(n_clusters=num_clusters).fit(preferences)
 spectral_groups = spectral.labels_
@@ -101,3 +104,4 @@ print()
 group_happiness = happiness.calculate_happiness(groups, distances, rd.students) # prints the happiness of the people
 print("Total Happiness: " + str(sum(group_happiness)))
 print("--------------------------------------------------\n\n\n")
+"""
