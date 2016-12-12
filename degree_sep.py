@@ -5,6 +5,8 @@ import copy, pdb
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.cluster import SpectralClustering
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import NearestNeighbors
 
 def print_data(data):
 	for i in data:
@@ -64,6 +66,124 @@ num_clusters = 5
 		
 #----------------KMeans Clustering Algoritm-----------------------
 #kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(distances)
+kmeans = KMeans(n_clusters=num_clusters, init='k-means++', random_state=0).fit(preferences)
+kmeans_groups = kmeans.labels_ #This is a np.ndarray
+
+group_centers = kmeans.cluster_centers_ #These are the cluster centers
+
+
+
+"""neigh = NearestNeighbors(algorithm='ball_tree')
+neigh_centers_fit = [neigh.fit(center) for center in centers]
+neigh_groups = {}
+
+for center in centers:
+	neigh_groups[center] = neigh.kneighbors(preferences, 5, return_distance=False)
+
+print(neigh_groups)
+"""
+
+#-----------------Outputs the kmean groups in a readable fashion
+
+groups = {}
+for i  in range(num_clusters):
+	groups[i] = []
+	
+for i in range(len(kmeans_groups)):
+	groups[kmeans_groups[i]].append(rd.students[i])
+
+print("-------------------KMeans------------------------")
+print_data(groups.items())
+print()
+group_happiness = happiness.calculate_happiness(groups, distances, rd.students) # prints the happiness of the people
+print("Total Happiness: " + str(sum(group_happiness)))
+print("-------------------------------------------------\n\n\n")
+
+
+while True:
+	done = True
+	for groupNumber, people in groups.items():
+		if len(people) != 5:
+			done = False
+	
+	if done == True:
+		break
+	small_group_centers = {}
+	bigPeopleNames = {}
+
+	for key, group in groups.items():
+		if len(group) < 5:
+			small_group_centers[key] = group_centers[key]
+		if len(group) > 5:
+			for person in group:
+				bigPeopleNames[rd.students.index(person)] = key
+	#pdb.set_trace()
+
+	new_prefs = {}
+	for person, groupNumber in bigPeopleNames.items():
+		new_prefs[person] = preferences[person]
+		
+	lowestDistance = float("inf")
+	lowestPerson = None
+	lowestGroup = None
+	bigGroup = None
+	for personIndex, personPrefs in new_prefs.items():
+		for groupNumber, groupCenter in small_group_centers.items():
+			distance = np.linalg.norm(personPrefs - groupCenter)
+			if distance < lowestDistance:
+				lowestDistance = distance
+				lowestPerson = personIndex
+				lowestGroup = groupNumber
+				bigGroup = bigPeopleNames[personIndex]
+	print(lowestDistance)
+	print(lowestPerson)
+	print(bigGroup)
+	print(lowestGroup)
+
+	groups[bigGroup].remove(rd.students[lowestPerson])
+	groups[lowestGroup].append(rd.students[lowestPerson])
+	print(groups)
+
+#print(small_group_centers)
+
+
+#Average the groups < 5 into a single point. 
+# For all of the people in the groups > 5, move the closest person to the "single point" into the smaller group
+# recalculate the average if the small group is still less than 5
+
+"""
+#pdb.set_trace()
+group_points = {}
+for key, group in groups.items():
+	#Condenses the group into a single point
+	if len(group) < 5:
+		avg = np.zeros_like(preferences[key])
+		#pdb.set_trace()
+		count = 0.0
+		for member in group:
+			idx = rd.students.index(member)
+			#pdb.set_trace()
+			avg += preferences[idx]
+			count += 1.0
+			print(preferences[idx])
+		avg = avg/count
+		group_points[key] = avg
+		print(avg)
+
+bigPeopleNames = []
+temp_groups = copy.deepcopy(groups)
+for key, group in groups.items():
+	if len(group) == 5:
+		del temp_groups[key] #make sure this doesn't mess up with copying stuff
+"""
+	
+	#if len(group) > 5:
+	#	bigPeopleNames += group
+"""
+num_clusters = len(temp_groups)
+
+#----------------KMeans Clustering Algoritm-----------------------
+#kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(distances)
 kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(preferences)
 kmeans_groups = kmeans.labels_ #This is a np.ndarray
 
@@ -80,23 +200,9 @@ print()
 group_happiness = happiness.calculate_happiness(groups, distances, rd.students) # prints the happiness of the people
 print("Total Happiness: " + str(sum(group_happiness)))
 print("-------------------------------------------------\n\n\n")
+"""
 
-#Average the groups < 5 into a single point. 
-# For all of the people in the groups > 5, move the closest person to the "single point" into the smaller group
-# recalculate the average if the small group is still less than 5
 
-for key, group in groups.items():
-	if len(group) < 5:
-		avg = np.empty_like(preferences[0])
-		count = 0.0
-		for member in group:
-			idx = rd.students.index(member)
-			#pdb.set_trace()
-			avg += preferences[idx]
-			count += 1.0
-			print(preferences[idx-1])
-		avg = avg/count
-		print(avg) 
 
 """[ 0.25      0.296875  0.        1.        0.        0.        0.        0.
   0.        0.4375    0.        0.        0.        0.        0.       -0.25
